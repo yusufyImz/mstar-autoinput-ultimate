@@ -19,6 +19,10 @@ venv.bak/
 *.log
 logs/
 
+# Installation logs
+setup.log
+system-check.txt
+
 # Config and data
 config.json
 user_data/
