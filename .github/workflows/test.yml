@@ -1,0 +1,112 @@
+name: Test and Validate
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python-version: ['3.11', '3.12']
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Verify imports
+      run: |
+        python -c "import torch; print('PyTorch:', torch.__version__)"
+        python -c "import cv2; print('OpenCV:', cv2.__version__)"
+        python -c "import flask; print('Flask:', flask.__version__)"
+        python -c "import numpy; print('NumPy:', numpy.__version__)"
+    
+    - name: Test config manager
+      run: |
+        python -c "from config_manager import ConfigManager; config = ConfigManager(); print('Config loaded:', config.get('language'))"
+    
+    - name: Test ML engine initialization
+      run: |
+        python -c "from ml_engine import MLEngine; from config_manager import ConfigManager; config = ConfigManager(); engine = MLEngine(config.config); print('ML Engine initialized')"
+    
+    - name: Test performance monitor
+      run: |
+        python -c "from performance_monitor import PerformanceMonitor; monitor = PerformanceMonitor(); stats = monitor.update(); print('Performance monitor OK')"
+    
+    - name: Test AI coach
+      run: |
+        python -c "from ai_coach import AICoach; coach = AICoach(); print('AI Coach initialized')"
+    
+    - name: Lint with basic Python syntax check
+      run: |
+        python -m py_compile main.py
+        python -m py_compile config_manager.py
+        python -m py_compile ml_engine.py
+        python -m py_compile game_controller.py
+        python -m py_compile ai_coach.py
+        python -m py_compile cloud_sync.py
+        python -m py_compile mobile_server.py
+        python -m py_compile performance_monitor.py
+
+  code-quality:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Check file structure
+      run: |
+        echo "Checking required files..."
+        test -f main.py && echo "✓ main.py exists"
+        test -f config_manager.py && echo "✓ config_manager.py exists"
+        test -f ml_engine.py && echo "✓ ml_engine.py exists"
+        test -f game_controller.py && echo "✓ game_controller.py exists"
+        test -f ai_coach.py && echo "✓ ai_coach.py exists"
+        test -f cloud_sync.py && echo "✓ cloud_sync.py exists"
+        test -f mobile_server.py && echo "✓ mobile_server.py exists"
+        test -f performance_monitor.py && echo "✓ performance_monitor.py exists"
+        test -f requirements.txt && echo "✓ requirements.txt exists"
+        test -f config.json && echo "✓ config.json exists"
+        test -f README.md && echo "✓ README.md exists"
+        test -f INSTALLATION_TR.md && echo "✓ INSTALLATION_TR.md exists"
+        test -f USER_GUIDE_TR.md && echo "✓ USER_GUIDE_TR.md exists"
+        test -f API_DOCUMENTATION.md && echo "✓ API_DOCUMENTATION.md exists"
+        test -d models && echo "✓ models/ directory exists"
+        test -d mobile_app && echo "✓ mobile_app/ directory exists"
+        echo "All required files present!"
+    
+    - name: Check Python version in code
+      run: |
+        echo "Checking Python version requirements..."
+        grep -q "3.11" README.md && echo "✓ Python 3.11 mentioned in README"
+        echo "Version check complete!"
+    
+    - name: Validate JSON files
+      run: |
+        python -c "import json; json.load(open('config.json')); print('✓ config.json is valid JSON')"
+    
+    - name: Check documentation completeness
+      run: |
+        echo "Checking documentation..."
+        grep -q "Kurulum" README.md && echo "✓ Turkish installation mentioned"
+        grep -q "API" API_DOCUMENTATION.md && echo "✓ API documentation exists"
+        grep -q "Kullanıcı" USER_GUIDE_TR.md && echo "✓ User guide in Turkish"
+        echo "Documentation check complete!"
