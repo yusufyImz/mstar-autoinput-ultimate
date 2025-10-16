@@ -10,8 +10,25 @@
 
 </div>
 
+## 🆕 Yeni: Otomatik Kurulum Script'leri!
+
+Artık **tek tıkla** kurulum yapabilirsiniz! 🚀
+
+| Script | Açıklama | Kullanım |
+|--------|----------|----------|
+| 🎯 **setup.bat** | Ana kurulum script'i - Git, Python ve paketleri otomatik kurar | Yönetici olarak çalıştır |
+| ⚡ **quick-start.bat** | Hızlı başlatma - Programı tek tıkla başlat | Çift tıkla |
+| 📦 **install-python-packages.bat** | Sadece Python paketlerini yükler | Çift tıkla |
+| 🔍 **check-system.bat** | Sistem kontrolü ve detaylı rapor oluşturur | Çift tıkla |
+| 💻 **setup.ps1** | PowerShell kurulum script'i (alternatif) | Yönetici olarak çalıştır |
+
+📖 **Detaylı rehber:** [KURULUM.md](KURULUM.md)
+
+---
+
 ## 📋 İçindekiler
 
+- [Otomatik Kurulum Script'leri](#-yeni-otomatik-kurulum-scriptleri)
 - [Genel Bakış](#-genel-bakış)
 - [Özellikler](#-özellikler)
 - [Sistem Gereksinimleri](#-sistem-gereksinimleri)
@@ -95,7 +112,44 @@ Club M Star AutoInput - Ultimate Edition, Club M Star ritim oyunu için gelişti
 
 ## 🚀 Kurulum
 
-### Hızlı Kurulum
+### ⚡ Tek Tıkla Otomatik Kurulum (Önerilen) 🆕
+
+**En kolay yol!** Hiçbir teknik bilgiye ihtiyaç yok:
+
+1. **Projeyi İndirin**
+   - [ZIP olarak indir](https://github.com/yusufyImz/mstar-autoinput-ultimate/archive/refs/heads/main.zip) ve çıkar
+   - VEYA: `git clone https://github.com/yusufyImz/mstar-autoinput-ultimate.git`
+
+2. **Kurulum Script'ini Çalıştır**
+   ```cmd
+   setup.bat dosyasına SAĞ TIKLA → "Yönetici olarak çalıştır"
+   ```
+
+3. **Bekle** ☕ (10-15 dakika)
+   - Git otomatik kurulur
+   - Python 3.11+ otomatik kurulur
+   - Tüm paketler otomatik yüklenir
+
+4. **Başlat!** 🎉
+   ```cmd
+   quick-start.bat (çift tıkla)
+   ```
+
+**Otomatik kurulum script'i şunları yapar:**
+- ✅ Sistem kontrolü (RAM, disk alanı, internet)
+- ✅ Git kurulumu (gerekiyorsa)
+- ✅ Python 3.11+ kurulumu (gerekiyorsa)
+- ✅ Tüm Python paketlerini yükleme
+- ✅ Klasör yapısını oluşturma
+- ✅ Detaylı log tutma
+
+📖 **Detaylı kurulum rehberi:** [KURULUM.md](KURULUM.md)
+
+---
+
+### 🛠️ Manuel Kurulum
+
+Otomatik kurulumu tercih etmiyorsanız:
 
 1. **Python Kurulumu**
    ```bash
@@ -119,9 +173,11 @@ Club M Star AutoInput - Ultimate Edition, Club M Star ritim oyunu için gelişti
    python main.py
    ```
 
-### Detaylı Kurulum
+### 📚 Ek Kaynaklar
 
-Detaylı kurulum talimatları için [INSTALLATION_TR.md](INSTALLATION_TR.md) dosyasına bakın.
+- **Otomatik Kurulum:** [KURULUM.md](KURULUM.md) - Tek tıkla kurulum rehberi
+- **Manuel Kurulum:** [INSTALLATION_TR.md](INSTALLATION_TR.md) - Detaylı adım adım kurulum
+- **Kullanım Kılavuzu:** [USER_GUIDE_TR.md](USER_GUIDE_TR.md) - Özellikler ve kullanım
 
 ## 📖 Kullanım
 
